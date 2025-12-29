@@ -52,6 +52,24 @@ GET http://localhost:8082/accounts/{accountNumber}
 GET http://localhost:8082/accounts/customer/{customerId}
 ```
 
+### Realizar debito de una cuenta
+```http
+POST http://localhost:8082/accounts/{accountNumber}/debit
+Header
+Content-Type: application/json
+Request Body
+100.50
+```
+
+### Realizar credito de una cuenta
+```http
+POST http://localhost:8082/accounts/{accountNumber}/credit
+Header
+Content-Type: application/json
+Request Body
+100.50
+```
+
 ### Health Check
 ```http
 GET http://localhost:8082/q/health
@@ -62,3 +80,10 @@ GET http://localhost:8082/q/health
 GET http://localhost:8082/q/metrics
 ```
 
+### Informacion para la base de datos(El resto de informacion esta en el application.properties)
+CREATE DATABASE account_db;
+CREATE USER account_user WITH PASSWORD 'account_password';
+ALTER DATABASE account_db OWNER TO account_user;
+INSERT INTO ACCOUNT (id, accountnumber, balance, customer_id, status, type) values(1,'988779944',1000,1,'ACTIVE','SAVINGS');
+INSERT INTO ACCOUNT (id, accountnumber, balance, customer_id, status, type) values(2,'222555555',3000,2,'ACTIVE','SAVINGS');
+INSERT INTO ACCOUNT (id, accountnumber, balance, customer_id, status, type) values(3,'222222222',50,1,'ACTIVE','SAVINGS');

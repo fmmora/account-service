@@ -7,6 +7,7 @@ import jakarta.ws.rs.core.MediaType;
 import org.acme.dto.AccountDTO;
 import org.acme.service.AccountService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Path("/accounts")
@@ -16,6 +17,20 @@ public class AccountResource {
 
     @Inject
     AccountService accountService;
+
+    @POST
+    @Path("/{accountNumber}/debit")
+    public void debit(@PathParam("accountNumber") String accountNumber,
+                      BigDecimal amount) {
+        accountService.debit(accountNumber, amount);
+    }
+
+    @POST
+    @Path("/{accountNumber}/credit")
+    public void credit(@PathParam("accountNumber") String accountNumber,
+                       BigDecimal amount) {
+        accountService.credit(accountNumber, amount);
+    }
 
     @GET
     @Path("/{accountNumber}")
